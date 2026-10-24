@@ -20,6 +20,10 @@ A restart button in the session header, plus a Windows tray icon with the same a
 ## Install
 
 ```sh
+# from npm — prebuilt, no build step
+dsh plugin add dsh-tray-restart
+
+# or straight from this repository
 dsh plugin add https://github.com/Joshua1ya/dsh-tray-restart
 ```
 
