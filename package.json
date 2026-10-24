@@ -1,0 +1,55 @@
+{
+  "name": "dsh-tray-restart",
+  "version": "0.2.0",
+  "type": "module",
+  "description": "Restart DeepSeek Harness (app + host) from a header button or a Windows tray icon.",
+  "license": "MIT",
+  "author": "Joshua1ya",
+  "homepage": "https://github.com/Joshua1ya/dsh-tray-restart#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joshua1ya/dsh-tray-restart.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Joshua1ya/dsh-tray-restart/issues"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "restart",
+    "tray",
+    "windows"
+  ],
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "assets/icon-96.png",
+    "assets/icon-180.png",
+    "assets/tray.ps1",
+    "assets/restart.ps1",
+    "assets/launch-tray.ps1",
+    "assets/launch-restart.ps1"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  }
+}

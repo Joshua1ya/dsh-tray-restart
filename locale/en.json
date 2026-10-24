@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Tray Restart",
+    "description": "Adds a DSH tray icon to the Windows notification area; right-click it to restart the app and its host, so newly installed plugins load without a manual quit and relaunch."
+  }
+}
