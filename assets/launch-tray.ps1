@@ -16,6 +16,8 @@
 
 $ErrorActionPreference = 'SilentlyContinue'
 
+. (Join-Path $PSScriptRoot 'hidden-process.ps1')
+
 function Write-Log([string]$Message) {
   if (-not $LogPath) { return }
   try {
@@ -41,7 +43,7 @@ Write-Log "requesting tray for shell $MainPid"
 Write-Log "command: $command"
 $spawned = $false
 try {
-  $result = Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{ CommandLine = $command } -ErrorAction Stop
+  $result = New-HiddenProcess -CommandLine $command
   if ($result.ReturnValue -eq 0) {
     $spawned = $true
     Write-Log "tray created outside the app job, pid $($result.ProcessId)"

@@ -14,6 +14,8 @@ $ErrorActionPreference = 'SilentlyContinue'
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
+. (Join-Path $PSScriptRoot 'hidden-process.ps1')
+
 function Write-Log([string]$Message) {
   if (-not $LogPath) { return }
   try {
@@ -76,7 +78,7 @@ $restartItem.Add_Click({
   $command = 'powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File "{0}" -MainPid {1} -Exe "{2}" -Lock "{3}"' -f $restartScript, $MainPid, $Exe, $Lock
   $spawned = $false
   try {
-    $result = Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{ CommandLine = $command } -ErrorAction Stop
+    $result = New-HiddenProcess -CommandLine $command
     if ($result.ReturnValue -eq 0) { $spawned = $true; Write-Log "restarter spawned via WMI pid $($result.ProcessId)" }
   } catch {
     Write-Log "WMI spawn failed: $($_.Exception.Message)"
